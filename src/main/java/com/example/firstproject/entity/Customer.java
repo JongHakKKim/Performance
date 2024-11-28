@@ -19,6 +19,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String cname;
 
     @Column(unique = true , nullable = false)
@@ -27,6 +28,13 @@ public class Customer {
     private String password;
 
     private String address;
+
+    private String nickname;
+
+    private String birthdate;
+
+    @Column(unique = true)
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Role role;

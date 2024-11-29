@@ -33,6 +33,9 @@ h1 {
     text-align: center;
     font-size: 2.5rem;
 }
+.container {
+    padding-bottom:6rem;
+}
 
 /* 네비게이션 바 배경색과 스타일 */
 .nav-item {
@@ -82,4 +85,64 @@ h1 {
 }
 .dropdown-item:hover {
     background-color: #e9ecef;
+}
+
+/* 주소 */
+
+.address-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.address-container .address-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.address-container .address-row input[type="text"],
+.address-container .address-row input[type="button"] {
+    margin-right: 10px;
+}
+
+.address-container input[type="text"] {
+    flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.address-container input[type="button"] {
+    padding: 10px 15px;
+    background-color: #5a67d8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.address-container input[type="button"]:hover {
+    background-color: #434dbd;
+}
+
+.address-container .detail-row {
+    display: flex;
+    gap: 10px; /* 각 입력 필드 사이의 간격 */
+}
+
+.address-container .detail-row input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+#sample6_postcode {
+    margin-bottom: 0;
 }

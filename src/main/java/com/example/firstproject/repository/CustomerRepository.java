@@ -12,5 +12,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     // 비교시에도 사용
     // 글을 댓글을 리뷰를 아이템을 삭제할때도 같아야 삭제하는데
     // 같은지 알려면 먼저 로그인한사람의 정보를 받아와야함으로 필요
-    Customer findByCname(String cname);
+    Customer findByCname(String cname);     // 아이디 중복 확인
+
+    Customer findByEmail(String email);     // 이메일 중복 확인
+
+    Customer findByPhoneNumber(String phoneNumber); // 휴대폰 번호 중복 확인
 }

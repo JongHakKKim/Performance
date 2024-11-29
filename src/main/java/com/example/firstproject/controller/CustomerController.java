@@ -2,6 +2,7 @@ package com.example.firstproject.controller;
 
 
 import ch.qos.logback.core.joran.conditional.IfAction;
+import com.example.firstproject.constant.Role;
 import com.example.firstproject.dto.CustomerDTO;
 import com.example.firstproject.service.CustomerService;
 import jakarta.validation.Valid;
@@ -37,7 +38,11 @@ public class CustomerController {
             BindingResult bindingResult,
             Model model) {
 
+        customerDTO.setRole(Role.USER);
+
         log.info("회원가입 요청 데이터: {}", customerDTO);
+
+
 
         // 유효성 검사 실패 처리
         if (bindingResult.hasErrors()) {
@@ -45,12 +50,17 @@ public class CustomerController {
             return "customer/customerForm"; // 에러 발생 시 다시 회원가입 페이지로 이동
         }
 
+
+
         try {
             customerService.saveCustomer(customerDTO); // 회원 정보 저장
+
         } catch (IllegalStateException e) {
             log.error("회원가입 중 예외 발생: {}", e.getMessage());
             model.addAttribute("msg", e.getMessage());
             return "customer/customerForm"; // 에러 메시지와 함께 다시 회원가입 페이지로 이동
+
+
         }
 
         // 회원가입 성공 후 로그인 페이지로 리다이렉트

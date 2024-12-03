@@ -6,6 +6,7 @@ import com.example.firstproject.entity.Customer;
 import com.example.firstproject.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,11 +16,12 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-
+@Log4j2
 public class CustomerService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
@@ -106,7 +108,14 @@ public class CustomerService implements UserDetailsService {
 
 
     public Customer findByNameAndEmail(String name, String email) {
-        return customerRepository.findByNameAndEmail(name, email).orElse(null);
+        log.info("findByNameAndEmail 호출: name={}, email={}", name, email);
+        Optional<Customer> customerOptional = customerRepository.findByNameAndEmail(name, email);
+
+        if (customerOptional.isEmpty()) {
+            log.warn("Customer not found for name={} and email={}", name, email);
+        }
+
+        return customerOptional.orElse(null);
     }
 
 

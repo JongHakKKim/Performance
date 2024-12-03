@@ -6,6 +6,7 @@ import com.example.firstproject.entity.Customer;
 import com.example.firstproject.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +20,7 @@ import java.util.Date;
 @Service
 @Transactional
 @RequiredArgsConstructor
-
+@Log4j2
 public class CustomerService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;

@@ -20,5 +20,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Customer findByPhoneNumber(String phoneNumber); // 휴대폰 번호 중복 확인
 
-    Optional<Customer> findByNameAndEmail(String name, String email);
+    Optional<Customer> findByNameAndEmail(String name, String email); // 아이디 찾기
 }

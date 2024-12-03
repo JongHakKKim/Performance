@@ -38,12 +38,9 @@ public class FindIdController {
 
         Customer customer = customerService.findByNameAndEmail(name, email);
         if (customer != null) {
-            log.info("오류");
-            log.info("오류");
-            log.info("오류");
-            log.info("오류");
             model.addAttribute("message", customer.getName() + "님의 아이디는 " + customer.getCname() + " 입니다.");
         } else {
+
             model.addAttribute("message", "해당 정보를 찾을 수 없습니다.");
         }
 

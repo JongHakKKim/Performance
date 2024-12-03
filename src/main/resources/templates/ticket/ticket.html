@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>티켓 목록</title>
+    <style>
+        .ticket-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .ticket {
+            width: 22%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .ticket img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .ticket-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination li a {
+            display: inline-block;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .pagination li a.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination li a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>티켓 목록</h1>
+    <div class="ticket-container">
+        <div class="ticket" th:each="ticket : ${ticketPage.content}">
+            <img src="이미지_경로" alt="티켓 이미지">
+            <div class="ticket-name" th:text="${ticket.performanceName}">공연 이름</div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

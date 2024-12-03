@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .find-id-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 15rem auto 0 auto;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .result {
+            margin-top: 20px;
+            color: red;
+            font-size: 14px;
+            display: none; /* 초기에는 숨김 */
+        }
+
+        .find-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .find-btn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="find-id-container">
+        <h1>아이디 찾기</h1>
+        <form id="findIdForm">
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+            </div>
+            <button type="submit" class="find-btn">아이디찾기</button>
+        </form>
+        <div class="result" id="resultMessage"></div>
+    </div>
+</th:block>
+
+<script th:inline="javascript">
+    const form = document.getElementById('findIdForm');
+    const resultMessage = document.getElementById('resultMessage');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        try {
+            const response = await fetch(/*[[@{/customers/findId}]]*/, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                resultMessage.style.display = 'block';
+                resultMessage.textContent = `${data.name}님의 아이디는 ${data.username} 입니다.`;
+            } else {
+                resultMessage.style.display = 'block';
+                resultMessage.textContent = '해당 정보를 찾을 수 없습니다.';
+            }
+        } catch (error) {
+            resultMessage.style.display = 'block';
+            resultMessage.textContent = '오류가 발생했습니다. 다시 시도해주세요.';
+        }
+    });
+</script>
+</body>
+</html>

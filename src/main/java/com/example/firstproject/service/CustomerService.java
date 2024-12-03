@@ -103,4 +103,11 @@ public class CustomerService implements UserDetailsService {
         }
     }
 
+
+
+    public Customer findByNameAndEmail(String name, String email) {
+        return customerRepository.findByNameAndEmail(name, email).orElse(null);
+    }
+
+
 }

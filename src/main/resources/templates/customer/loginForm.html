@@ -6,46 +6,133 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <style>
+        /* 내부에 CSS를 직접 작성 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            height: 100vh; /* 화면 높이를 100%로 설정 */
+            margin: 0;
+        }
+
+
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 15rem auto 0 auto;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .login-form {
+            margin-top: 20px;
+        }
+
+        .login-form .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px 35px 10px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-form input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #666;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links span {
+            margin: 0 5px;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
 <th:block layout:fragment="content">
-
-    <div class="row mt-5" >
-        <div class="col-8 offset-2">
-            <h1>로그인</h1>
-
-            <div th:if="${param.error}">
-                <p style="color: red;">아이디 또는 비밀번호를 확인해주세요.</p>
+    <div class="login-container">
+        <h1>회원정보입력</h1>
+        <form class="login-form" action="/customers/login" method="post">
+            <!-- 아이디 입력 -->
+            <div class="input-group">
+                <input type="text" name="cname" id="cname" placeholder="회원아이디" required>
+                <span class="icon">👤</span>
             </div>
-            <script th:inline="javascript">
-                let errorMsg = [[${param.error}]]
-                if(errorMsg) {
-                    alert("아이디 또는 비밀번호를 확인해주세요")
-                }
-
-
-            </script>
-            <form class="row g-3 mt-3 formA" th:action="@{/login}" method="post">
-                <div class="col-md-6">
-                    <label for="cname" class="form-label">아이디</label>
-                    <input type="text" name="cname" class="form-control" id="cname" placeholder="아이디를 입력해주세요" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요" required>
-                </div>
-
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary formbtn">로그인</button>
-                    <a href="/customers/new" class="btn btn-secondary">회원가입</a>
-                </div>
-            </form>
-
+            <!-- 비밀번호 입력 -->
+            <div class="input-group">
+                <input type="password" name="password" id="password" placeholder="비밀번호" required>
+                <span class="icon">🔒</span>
+            </div>
+            <!-- 로그인 버튼 -->
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <!-- 하단 링크 -->
+        <div class="footer-links">
+            <a href="/customers/new">회원가입</a>
+            <span>•</span>
+            <a href="/customers/findId">아이디 찾기</a>
+            <span>•</span>
+            <a href="/customers/findPassword">비밀번호 찾기</a>
         </div>
-
     </div>
-
 </th:block>
 
 

@@ -22,6 +22,9 @@ public class Customer {
     @Column(unique = true, nullable = false)
     private String cname;
 
+    @Column(nullable = false)
+    private String name; // 이름 필드 추가
+
     @Column(unique = true , nullable = false)
     private String email;
 
@@ -46,4 +49,6 @@ public class Customer {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
 }

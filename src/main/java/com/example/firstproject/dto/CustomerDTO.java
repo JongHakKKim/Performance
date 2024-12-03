@@ -24,6 +24,9 @@ public class CustomerDTO {
     @Size(min = 2, max = 10 , message = "아이디는 2자 이상, 10자 이하로 입력해주세요.")
     private String cname;
 
+    @NotBlank(message = "이름은 필수 입력 항목입니다.") // 이름 유효성 검사 추가
+    private String name; // 이름 필드 추가
+
     @Email(message = "유효한 이메일 주소를 입력해주세요.")
     @NotBlank(message = "이메일은 필수 입력 항목입니다.")
     @Size(min = 2, max = 20)
@@ -56,10 +59,13 @@ public class CustomerDTO {
     private Role role;
 
     public Customer dtoToEntity(CustomerDTO customerDTO) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         Customer customer = new Customer();
+        customer.setName(customerDTO.getName()); // 이름 추가
         customer.setCname(customerDTO.getCname());
         customer.setEmail(customerDTO.getEmail());
-        customer.setPassword(customerDTO.getPassword());
+        customer.setPassword(passwordEncoder.encode(customerDTO.getPassword())); // 암호화된 비밀번호
         customer.setNickname(customerDTO.getNickname());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
         customer.setPostcode(customerDTO.getPostcode());
@@ -68,6 +74,9 @@ public class CustomerDTO {
         customer.setDetailAddress(customerDTO.getDetailAddress());
         customer.setExtraAddress(customerDTO.getExtraAddress());
         customer.setRole(Role.USER);
+
         return customer;
     }
+
+
 }

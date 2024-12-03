@@ -3,6 +3,8 @@ package com.example.firstproject.repository;
 import com.example.firstproject.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     // 로그인 한 유저정보 email을 통해서 각종 검색을 위한 기능
@@ -17,4 +19,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Customer findByEmail(String email);     // 이메일 중복 확인
 
     Customer findByPhoneNumber(String phoneNumber); // 휴대폰 번호 중복 확인
+
+    Optional<Customer> findByNameAndEmail(String name, String email);
 }

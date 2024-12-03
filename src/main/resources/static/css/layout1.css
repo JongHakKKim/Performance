@@ -29,13 +29,16 @@ footer {
     text-align: center;
     padding: 2rem 0;
 }
+
 h1 {
     text-align: center;
     font-size: 2.5rem;
 }
 .container {
+
     padding-bottom:6rem;
 }
+
 
 /* 네비게이션 바 배경색과 스타일 */
 .nav-item {
